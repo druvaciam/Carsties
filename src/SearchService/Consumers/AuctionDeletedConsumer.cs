@@ -11,6 +11,6 @@ public class AuctionDeletedConsumer() : IConsumer<AuctionDeleted>
 	{
 		Console.WriteLine($"--> Consuming auction deleted: {context.Message.Id}");
 		var res = await DB.DeleteAsync<Item>(context.Message.Id);
-		if (!res.IsAcknowledged) throw new MessageException(typeof(AuctionDeleted), "Problem deleting auction");
+		if (!res.IsAcknowledged) throw new MessageException(typeof(AuctionDeleted), $"Problem deleting auction {context.Message.Id}");
 	}
 }
